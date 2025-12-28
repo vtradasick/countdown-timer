@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Bộ đếm thời gian</title>
+  <style>
+    body {
+      background: #0f172a;
+      color: white;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .timer {
+      text-align: center;
+      padding: 30px 50px;
+      border-radius: 12px;
+      background: #1e293b;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    #countdown {
+      font-size: 40px;
+      font-weight: bold;
+      color: #22c55e;
+    }
+  </style>
+</head>
+<body>
+
+<div class="timer">
+  <h1>⏳ Đếm ngược đến sự kiện</h1>
+  <div id="countdown">Loading...</div>
+</div>
+
+<script>
+  // 🔧 Đổi thời gian tại đây (YYYY-MM-DD HH:MM:SS)
+  const targetDate = new Date("2025-12-31 23:59:59").getTime();
+
+  const countdown = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    if (distance <= 0) {
+      document.getElementById("countdown").innerHTML = "🎉 Đã đến giờ!";
+      clearInterval(countdown);
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((distance / (1000 * 60)) % 60);
+    const seconds = Math.floor((distance / 1000) % 60);
+
+    document.getElementById("countdown").innerHTML =
+      `${days} ngày ${hours} giờ ${minutes} phút ${seconds} giây`;
+  }, 1000);
+</script>
+
+</body>
+</html>
